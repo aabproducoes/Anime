@@ -38,6 +38,11 @@
         .url-item a {
             color: lime;
             text-decoration: none;
+            white-space: nowrap; /* Ensure URL is in one line */
+            overflow: hidden;    /* Hide the overflow */
+            text-overflow: ellipsis; /* Add ellipsis for overflow */
+            display: block;      /* Ensure proper formatting in block context */
+            width: 100%;         /* Ensure the ellipsis works properly */
         }
         .url-item .status {
             cursor: pointer;
@@ -166,3 +171,4 @@
     </script>
 </body>
 </html>
+    
