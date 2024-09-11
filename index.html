@@ -10,10 +10,11 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            height: 100vh;
+            justify-content: flex-start; /* Changed to flex-start to allow content to start from the top */
+            min-height: 100vh;
             background-color: #000;
             color: #fff;
+            padding-top: 20px; /* Added padding to ensure the top URL is visible */
         }
         .plus-sign {
             font-size: 48px;
@@ -25,6 +26,7 @@
             width: 100%;
             max-width: 400px;
             margin-bottom: 20px;
+            padding-top: 20px; /* Add padding to the top */
         }
         .url-item {
             background-color: #2c3e50;
@@ -38,11 +40,11 @@
         .url-item a {
             color: lime;
             text-decoration: none;
-            white-space: nowrap; /* Ensure URL is in one line */
-            overflow: hidden;    /* Hide the overflow */
-            text-overflow: ellipsis; /* Add ellipsis for overflow */
-            display: block;      /* Ensure proper formatting in block context */
-            width: 100%;         /* Ensure the ellipsis works properly */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
+            width: 100%;
         }
         .url-item .status {
             cursor: pointer;
@@ -123,16 +125,21 @@
 
             renderUrlList();
 
+            function isValidUrl(url) {
+                const urlPattern = /^(http|https):\/\/[^ "]+$/;
+                return urlPattern.test(url);
+            }
+
             document.getElementById('plusSign').addEventListener('click', function() {
                 document.getElementById('formContainer').style.display = 'flex';
             });
 
             document.getElementById('addButton').addEventListener('click', function() {
-                const url = document.getElementById('urlInput').value;
+                const url = document.getElementById('urlInput').value.trim();
                 const status = document.getElementById('statusSelect').value;
 
-                if (!url || !status) {
-                    alert('Please enter the URL and select the status.');
+                if (!url || !status || !isValidUrl(url)) {
+                    alert('Please enter a valid URL and select the status.');
                     return;
                 }
 
@@ -171,4 +178,3 @@
     </script>
 </body>
 </html>
-    
